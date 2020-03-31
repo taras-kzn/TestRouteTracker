@@ -13,6 +13,7 @@ class OneViewController: UIViewController {
     
     let coordinate = CLLocationCoordinate2D(latitude: 55.753215, longitude: 37.622504)
     var marker: GMSMarker?
+    var manualMarker: GMSMarker?
     
     @IBOutlet var mapView: GMSMapView!
     
@@ -26,6 +27,7 @@ class OneViewController: UIViewController {
         mapView.settings.myLocationButton = true
         mapView.mapType = .hybrid
         mapView.camera = camera
+        mapView.delegate = self
     }
     
     @IBAction func goHome(_ sender: Any) {
@@ -52,5 +54,17 @@ class OneViewController: UIViewController {
     func removeMarker() {
         marker?.map = nil
         marker = nil
+    }
+}
+
+extension OneViewController: GMSMapViewDelegate {
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        if let manualMarker = manualMarker {
+            manualMarker.position = coordinate
+        } else {
+            let marker = GMSMarker(position: coordinate)
+            marker.map = mapView
+            self.manualMarker = marker
+        }
     }
 }
