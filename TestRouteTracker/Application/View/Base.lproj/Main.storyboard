@@ -30,11 +30,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="LOe-w3-9E0">
-                        <barButtonItem key="leftBarButtonItem" title="Marker" id="9AI-ZI-kZ2">
-                            <connections>
-                                <action selector="toggleMarker:" destination="BYZ-38-t0r" id="NtW-pA-MJ4"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Home" id="HU8-vw-ygi">
                             <connections>
                                 <action selector="goHome:" destination="BYZ-38-t0r" id="F4n-xa-f4q"/>
