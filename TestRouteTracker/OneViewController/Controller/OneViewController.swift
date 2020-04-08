@@ -19,30 +19,63 @@ class OneViewController: UIViewController {
     var manualMarker: GMSMarker?
     var locationManager: CLLocationManager?
     var geocoder: CLGeocoder = CLGeocoder()
+    var status = false
+    var route: GMSPolyline?
+    var routePath: GMSMutablePath?
     
+    @IBOutlet var actionButton: UIButton!
     @IBOutlet var mapView: GMSMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureMap()
         configureLocationManager()
+        actionButton.layer.cornerRadius = 15
     }
     
     func configureMap() {
         let camera = GMSCameraPosition.camera(withTarget: coordinate, zoom: 17)
-        mapView.settings.myLocationButton = true
         mapView.mapType = .hybrid
         mapView.camera = camera
+        mapView.addSubview(actionButton)
         mapView.delegate = self
     }
     
     func configureLocationManager() {
         locationManager = CLLocationManager()
-        locationManager?.requestWhenInUseAuthorization()
         locationManager?.delegate = self
+        locationManager?.allowsBackgroundLocationUpdates = true
+        locationManager?.pausesLocationUpdatesAutomatically = false
+        locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager?.startMonitoringSignificantLocationChanges()
+        locationManager?.requestAlwaysAuthorization()
+        locationManager?.requestLocation()
     }
     
-    @IBAction func goHome(_ sender: Any) {
+    @IBAction func action(_ sender: UIButton) {
+        if status {
+            actionButton.setTitle("Start", for: .normal)
+            locationManager?.stopUpdatingLocation()
+            status = false
+        } else {
+            actionButton.setTitle("Stop", for: .normal)
+            route?.map = nil
+            route = GMSPolyline()
+            routePath = GMSMutablePath()
+            route?.map = mapView
+            locationManager?.startUpdatingLocation()
+            status = true
+        }
+    }
+    
+    func newAddMarker(coordinate: CLLocationCoordinate2D) {
+        let marker = GMSMarker(position: coordinate)
+        let camera = GMSCameraPosition.camera(withTarget: coordinate, zoom: 17)
+        marker.map = mapView
+        mapView.animate(to: camera)
+    }
+    
+    @IBAction func goHome(_ sender: UIButton) {
         locationManager?.startUpdatingLocation()
         guard let title = titleMarker else {return}
         guard let snipet = snipetMarker else {return}
@@ -53,14 +86,17 @@ class OneViewController: UIViewController {
             mapView.animate(toLocation: coordinate)
             addMarker(position: coordinate, title: title, snipet: snipet)
         }
+        
     }
     
     func addMarker(position: CLLocationCoordinate2D, title: String, snipet: String) {
         let marker = GMSMarker(position: position)
+        let camera = GMSCameraPosition.camera(withTarget: position, zoom: 17)
         marker.icon = GMSMarker.markerImage(with: .green)
         marker.title = title
         marker.snippet = snipet
         marker.map = mapView
+        mapView.animate(to: camera)
         self.marker = marker
     }
     
@@ -95,10 +131,11 @@ extension OneViewController: GMSMapViewDelegate {
 
 extension OneViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        for item in locations {
-            newCoordinate = item.coordinate
-        }
-        guard let location = locations.first else {return}
+        guard let location = locations.last else {return}
+        routePath?.add(location.coordinate)
+        route?.path = routePath
+        let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
+        mapView.animate(to: position)
         geocoder.reverseGeocodeLocation(CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)) { (places, erro) in
             if let place = places?.first {
                 self.titleMarker = place.country

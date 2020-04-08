@@ -17,7 +17,26 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qoI-tx-ZU2" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxp-qW-BvE">
+                                        <rect key="frame" x="143" y="658" width="128" height="39"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <state key="normal" title="Start">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="action:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zt2-rX-doF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="sxp-qW-BvE" secondAttribute="trailing" constant="143" id="WSB-o8-p2c"/>
+                                    <constraint firstAttribute="bottom" secondItem="sxp-qW-BvE" secondAttribute="bottom" constant="111" id="ahB-3C-8R8"/>
+                                    <constraint firstItem="sxp-qW-BvE" firstAttribute="leading" secondItem="qoI-tx-ZU2" secondAttribute="leading" constant="143" id="eva-vK-woK"/>
+                                    <constraint firstItem="sxp-qW-BvE" firstAttribute="top" secondItem="qoI-tx-ZU2" secondAttribute="top" constant="658" id="oD4-mv-5Ae"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -37,6 +56,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="actionButton" destination="sxp-qW-BvE" id="AuF-Rf-1v3"/>
                         <outlet property="mapView" destination="qoI-tx-ZU2" id="p11-9b-hyr"/>
                     </connections>
                 </viewController>
