@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,9 +13,16 @@
 		845AF75424313F75009CA3C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845AF75324313F75009CA3C4 /* Assets.xcassets */; };
 		845AF75724313F75009CA3C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845AF75524313F75009CA3C4 /* LaunchScreen.storyboard */; };
 		845AF75F24314026009CA3C4 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 845AF75E24314026009CA3C4 /* .gitignore */; };
+		845AF7682433CC55009CA3C4 /* OneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AF7672433CC55009CA3C4 /* OneViewController.swift */; };
+		845AF76D243DDEAD009CA3C4 /* SaveRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AF76C243DDEAD009CA3C4 /* SaveRoute.swift */; };
+		845AF770243E1A19009CA3C4 /* RealmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AF76F243E1A19009CA3C4 /* RealmData.swift */; };
+		851A141C909734608FD2EC0B /* Pods_TestRouteTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749EF0A5519B2CF9FFCBB39C /* Pods_TestRouteTracker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A620624E619992F5FCF8CB0 /* Pods-TestRouteTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestRouteTracker.release.xcconfig"; path = "Target Support Files/Pods-TestRouteTracker/Pods-TestRouteTracker.release.xcconfig"; sourceTree = "<group>"; };
+		37592EBCA6D33A44929B171F /* Pods-TestRouteTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestRouteTracker.debug.xcconfig"; path = "Target Support Files/Pods-TestRouteTracker/Pods-TestRouteTracker.debug.xcconfig"; sourceTree = "<group>"; };
+		749EF0A5519B2CF9FFCBB39C /* Pods_TestRouteTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestRouteTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		845AF74724313F6F009CA3C4 /* TestRouteTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestRouteTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		845AF74A24313F6F009CA3C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		845AF74C24313F6F009CA3C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +31,9 @@
 		845AF75624313F75009CA3C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		845AF75824313F75009CA3C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		845AF75E24314026009CA3C4 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		845AF7672433CC55009CA3C4 /* OneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneViewController.swift; sourceTree = "<group>"; };
+		845AF76C243DDEAD009CA3C4 /* SaveRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRoute.swift; sourceTree = "<group>"; };
+		845AF76F243E1A19009CA3C4 /* RealmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				851A141C909734608FD2EC0B /* Pods_TestRouteTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +54,8 @@
 				845AF75E24314026009CA3C4 /* .gitignore */,
 				845AF74924313F6F009CA3C4 /* TestRouteTracker */,
 				845AF74824313F6F009CA3C4 /* Products */,
+				BB5C7DB652D84C66C0235BBF /* Pods */,
+				ECD850C651EFF5AB740B4620 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,8 +70,10 @@
 		845AF74924313F6F009CA3C4 /* TestRouteTracker */ = {
 			isa = PBXGroup;
 			children = (
+				845AF7652433CC27009CA3C4 /* OneViewController */,
 				845AF76024314601009CA3C4 /* Application */,
 				845AF7642431468E009CA3C4 /* Resource */,
+				845AF76A243DDE76009CA3C4 /* Realm */,
 			);
 			path = TestRouteTracker;
 			sourceTree = "<group>";
@@ -107,6 +122,64 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		845AF7652433CC27009CA3C4 /* OneViewController */ = {
+			isa = PBXGroup;
+			children = (
+				845AF7662433CC40009CA3C4 /* Controller */,
+			);
+			path = OneViewController;
+			sourceTree = "<group>";
+		};
+		845AF7662433CC40009CA3C4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				845AF7672433CC55009CA3C4 /* OneViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		845AF76A243DDE76009CA3C4 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				845AF76B243DDE87009CA3C4 /* Model */,
+				845AF76E243E19C8009CA3C4 /* Controller */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		845AF76B243DDE87009CA3C4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				845AF76C243DDEAD009CA3C4 /* SaveRoute.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		845AF76E243E19C8009CA3C4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				845AF76F243E1A19009CA3C4 /* RealmData.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BB5C7DB652D84C66C0235BBF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				37592EBCA6D33A44929B171F /* Pods-TestRouteTracker.debug.xcconfig */,
+				1A620624E619992F5FCF8CB0 /* Pods-TestRouteTracker.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		ECD850C651EFF5AB740B4620 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				749EF0A5519B2CF9FFCBB39C /* Pods_TestRouteTracker.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -114,9 +187,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 845AF75B24313F75009CA3C4 /* Build configuration list for PBXNativeTarget "TestRouteTracker" */;
 			buildPhases = (
+				E81BF8F1AC347276BC9694EC /* [CP] Check Pods Manifest.lock */,
 				845AF74324313F6F009CA3C4 /* Sources */,
 				845AF74424313F6F009CA3C4 /* Frameworks */,
 				845AF74524313F6F009CA3C4 /* Resources */,
+				801DDA470F914603AE3A3D9E /* [CP] Copy Pods Resources */,
+				F44B86D4C49F9BF4F4DBB707 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -174,11 +250,73 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		801DDA470F914603AE3A3D9E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TestRouteTracker/Pods-TestRouteTracker-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TestRouteTracker/Pods-TestRouteTracker-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TestRouteTracker/Pods-TestRouteTracker-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E81BF8F1AC347276BC9694EC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TestRouteTracker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F44B86D4C49F9BF4F4DBB707 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TestRouteTracker/Pods-TestRouteTracker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TestRouteTracker/Pods-TestRouteTracker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TestRouteTracker/Pods-TestRouteTracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		845AF74324313F6F009CA3C4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				845AF76D243DDEAD009CA3C4 /* SaveRoute.swift in Sources */,
+				845AF7682433CC55009CA3C4 /* OneViewController.swift in Sources */,
+				845AF770243E1A19009CA3C4 /* RealmData.swift in Sources */,
 				845AF74B24313F6F009CA3C4 /* AppDelegate.swift in Sources */,
 				845AF74D24313F6F009CA3C4 /* SceneDelegate.swift in Sources */,
 			);
@@ -322,6 +460,7 @@
 		};
 		845AF75C24313F75009CA3C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37592EBCA6D33A44929B171F /* Pods-TestRouteTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -340,6 +479,7 @@
 		};
 		845AF75D24313F75009CA3C4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A620624E619992F5FCF8CB0 /* Pods-TestRouteTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
