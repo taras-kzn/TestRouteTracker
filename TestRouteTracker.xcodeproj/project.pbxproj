@@ -17,6 +17,9 @@
 		845AF76D243DDEAD009CA3C4 /* SaveRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AF76C243DDEAD009CA3C4 /* SaveRoute.swift */; };
 		845AF770243E1A19009CA3C4 /* RealmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AF76F243E1A19009CA3C4 /* RealmData.swift */; };
 		845AF7722445AF82009CA3C4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AF7712445AF82009CA3C4 /* User.swift */; };
+		845AF7762445BD1A009CA3C4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AF7752445BD1A009CA3C4 /* LoginViewController.swift */; };
+		845AF77A2445CFD0009CA3C4 /* RegistrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AF7792445CFD0009CA3C4 /* RegistrViewController.swift */; };
+		845AF77C2445D535009CA3C4 /* RealmUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AF77B2445D535009CA3C4 /* RealmUserData.swift */; };
 		851A141C909734608FD2EC0B /* Pods_TestRouteTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749EF0A5519B2CF9FFCBB39C /* Pods_TestRouteTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +39,9 @@
 		845AF76C243DDEAD009CA3C4 /* SaveRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRoute.swift; sourceTree = "<group>"; };
 		845AF76F243E1A19009CA3C4 /* RealmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmData.swift; sourceTree = "<group>"; };
 		845AF7712445AF82009CA3C4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		845AF7752445BD1A009CA3C4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		845AF7792445CFD0009CA3C4 /* RegistrViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrViewController.swift; sourceTree = "<group>"; };
+		845AF77B2445D535009CA3C4 /* RealmUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmUserData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +78,8 @@
 		845AF74924313F6F009CA3C4 /* TestRouteTracker */ = {
 			isa = PBXGroup;
 			children = (
+				845AF7772445CF95009CA3C4 /* RegistrViewController */,
+				845AF7732445BB14009CA3C4 /* LoginViewController */,
 				845AF7652433CC27009CA3C4 /* OneViewController */,
 				845AF76024314601009CA3C4 /* Application */,
 				845AF7642431468E009CA3C4 /* Resource */,
@@ -162,6 +170,39 @@
 			isa = PBXGroup;
 			children = (
 				845AF76F243E1A19009CA3C4 /* RealmData.swift */,
+				845AF77B2445D535009CA3C4 /* RealmUserData.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		845AF7732445BB14009CA3C4 /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				845AF7742445BB3B009CA3C4 /* Controller */,
+			);
+			path = LoginViewController;
+			sourceTree = "<group>";
+		};
+		845AF7742445BB3B009CA3C4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				845AF7752445BD1A009CA3C4 /* LoginViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		845AF7772445CF95009CA3C4 /* RegistrViewController */ = {
+			isa = PBXGroup;
+			children = (
+				845AF7782445CFB8009CA3C4 /* Controller */,
+			);
+			path = RegistrViewController;
+			sourceTree = "<group>";
+		};
+		845AF7782445CFB8009CA3C4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				845AF7792445CFD0009CA3C4 /* RegistrViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -317,10 +358,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				845AF7762445BD1A009CA3C4 /* LoginViewController.swift in Sources */,
+				845AF77C2445D535009CA3C4 /* RealmUserData.swift in Sources */,
 				845AF76D243DDEAD009CA3C4 /* SaveRoute.swift in Sources */,
 				845AF7682433CC55009CA3C4 /* OneViewController.swift in Sources */,
 				845AF7722445AF82009CA3C4 /* User.swift in Sources */,
 				845AF770243E1A19009CA3C4 /* RealmData.swift in Sources */,
+				845AF77A2445CFD0009CA3C4 /* RegistrViewController.swift in Sources */,
 				845AF74B24313F6F009CA3C4 /* AppDelegate.swift in Sources */,
 				845AF74D24313F6F009CA3C4 /* SceneDelegate.swift in Sources */,
 			);
