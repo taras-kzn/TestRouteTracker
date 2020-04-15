@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import RealmSwift
 
-class OneViewController: UIViewController {
+class OneViewController: UIViewController, Storyboarded {
 
     let realmService = RealmData()
     var marker: GMSMarker?
@@ -20,6 +20,7 @@ class OneViewController: UIViewController {
     var saveRoute: GMSPolyline?
     var route: GMSPolyline?
     var routePath: GMSMutablePath?
+    var coordinator: MainCoordinators?
     
     @IBOutlet var actionButton: UIButton!
     @IBOutlet var mapView: GMSMapView!

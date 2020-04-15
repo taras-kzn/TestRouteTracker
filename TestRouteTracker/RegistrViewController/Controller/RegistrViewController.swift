@@ -8,13 +8,14 @@
 
 import UIKit
 
-class RegistrViewController: UIViewController {
+class RegistrViewController: UIViewController, Storyboarded {
 
     @IBOutlet var scroolView: UIScrollView!
     @IBOutlet var passwordTextFild: UITextField!
     @IBOutlet var loginTextFild: UITextField!
     
     let realmService = RealmUserData()
+    var coordinator: MainCoordinators?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +55,32 @@ class RegistrViewController: UIViewController {
     
     @IBAction func registrButton(_ sender: Any) {
         guard let login = loginTextFild.text, let password = passwordTextFild.text else {return}
-        realmService.saveUserData(login: login, password: password)
-        print("Успешно зарегестрировались")
+        if !login.isEmpty , !password.isEmpty {
+            realmService.saveUserData(login: login, password: password)
+            messageAlert(title: "Отлично", message: "Вы успешно зарегестрировались")
+        } else {
+            messageError()
+        }
+    }
+    
+    func messageAlert(title: String, message: String) {
+        loginTextFild.text = nil
+        passwordTextFild.text = nil
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ок", style: .default, handler: actionAlert)
+        ac.addAction(action)
+        present(ac, animated: true)
+    }
+    
+    func actionAlert(action: UIAlertAction! = nil) {
+        coordinator?.start()
+    }
+    
+    func messageError() {
+        let ac = UIAlertController(title: "Ошибка", message: "По пробовать заново", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default)
+        ac.addAction(action)
+        present(ac, animated: true)
     }
     
     @objc func keyboardWasShown(notification: Notification) {

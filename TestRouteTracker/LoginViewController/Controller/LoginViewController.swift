@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, Storyboarded {
 
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var loginTextFild: UITextField!
@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
     
     var realmService = RealmUserData()
     var users = User()
+    var coordinator: MainCoordinators?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,15 +56,23 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginActionButton(_ sender: Any) {
-        guard let login = loginTextFild.text, let password = passwordTextFild.text else {return}
+        guard let login = loginTextFild.text?.lowercased(), let password = passwordTextFild.text?.lowercased() else {return}
+        
         loadUsers(login: login)
-        if login == users.login && password == users.password {
+        
+        if !users.login.isEmpty, !users.password.isEmpty {
+            if login == users.login.lowercased() && password == users.password.lowercased() {
+                coordinator?.goMainVC()
+            } else {
+                errorAuthorization()
+            }
         } else {
             errorAuthorization()
         }
     }
     
-    @IBAction func registrButton(_ sender: Any) {
+    @IBAction func registerButton(_ sender: Any) {
+        coordinator?.goRegistrVC()
     }
     
     func loadUsers(login: String) {

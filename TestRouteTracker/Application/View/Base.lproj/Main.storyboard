@@ -10,7 +10,7 @@
         <!--One View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="OneViewController" customModule="TestRouteTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OneViewController" id="BYZ-38-t0r" customClass="OneViewController" customModule="TestRouteTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -67,7 +67,7 @@
         <!--Login View Controller-->
         <scene sceneID="QjA-Zh-kOO">
             <objects>
-                <viewController id="Iug-mH-5pe" customClass="LoginViewController" customModule="TestRouteTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="Iug-mH-5pe" customClass="LoginViewController" customModule="TestRouteTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MRc-cV-rSz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -94,7 +94,7 @@
                                                 <color key="tintColor" red="0.12941176469999999" green="0.14901960780000001" blue="0.17254901959999999" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="Регистрация"/>
                                                 <connections>
-                                                    <segue destination="lQn-LH-l5A" kind="show" id="khQ-LS-wPY"/>
+                                                    <action selector="registerButton:" destination="Iug-mH-5pe" eventType="touchUpInside" id="dxB-xh-fsZ"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FHK-If-Jyo">
@@ -160,7 +160,7 @@
         <!--Registr View Controller-->
         <scene sceneID="bUr-i1-dgd">
             <objects>
-                <viewController id="lQn-LH-l5A" customClass="RegistrViewController" customModule="TestRouteTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegistrViewController" id="lQn-LH-l5A" customClass="RegistrViewController" customModule="TestRouteTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DUd-1z-GqB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -238,10 +238,10 @@
             </objects>
             <point key="canvasLocation" x="2376.811594202899" y="-68.303571428571431"/>
         </scene>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="VWh-qm-YZh">
             <objects>
-                <viewController id="vMK-rz-LpG" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="vMK-rz-LpG" customClass="MainViewController" customModule="TestRouteTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3zU-qP-que">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -252,6 +252,9 @@
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.12941176469999999" green="0.14901960780000001" blue="0.17254901959999999" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Показать карту"/>
+                                <connections>
+                                    <action selector="actionMapsButton:" destination="vMK-rz-LpG" eventType="touchUpInside" id="BFK-uQ-HVk"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="na7-46-sZ2">
                                 <rect key="frame" x="129" y="501" width="157" height="30"/>
@@ -259,6 +262,9 @@
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.12941176469999999" green="0.14901960780000001" blue="0.17254901959999999" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Выйти"/>
+                                <connections>
+                                    <action selector="backLoginButton:" destination="vMK-rz-LpG" eventType="touchUpInside" id="GRq-TZ-8u8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -279,9 +285,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Iug-mH-5pe" kind="relationship" relationship="rootViewController" id="fz7-eU-hbH"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pLj-m2-RYJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
