@@ -76,16 +76,22 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tHg-gb-5td">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="39p-Oy-UWt" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39p-Oy-UWt" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="696"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Логин" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fbV-08-g8E">
                                                 <rect key="frame" x="41" y="311" width="332" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="34" id="oMC-TS-DP7"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Fk-vl-Vwc">
                                                 <rect key="frame" x="41" y="405" width="332" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="34" id="TjE-BV-20y"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no"/>
                                             </textField>
@@ -93,6 +99,7 @@
                                                 <rect key="frame" x="157" y="559" width="100" height="30"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="Sqd-EA-zXO"/>
                                                     <constraint firstAttribute="width" constant="100" id="T0o-Um-y1L"/>
                                                 </constraints>
                                                 <color key="tintColor" red="0.12941176469999999" green="0.14901960780000001" blue="0.17254901959999999" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
@@ -106,6 +113,7 @@
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="OXn-UM-GST"/>
+                                                    <constraint firstAttribute="height" constant="30" id="jMy-4F-nIZ"/>
                                                 </constraints>
                                                 <color key="tintColor" red="0.12941176469999999" green="0.14901960780000001" blue="0.17254901959999999" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="Вход"/>
@@ -145,7 +153,7 @@
                             <constraint firstItem="tHg-gb-5td" firstAttribute="leading" secondItem="MRc-cV-rSz" secondAttribute="leading" id="13o-KL-1m0"/>
                             <constraint firstItem="tHg-gb-5td" firstAttribute="top" secondItem="MRc-cV-rSz" secondAttribute="top" id="L57-Bl-Uag"/>
                             <constraint firstAttribute="bottom" secondItem="tHg-gb-5td" secondAttribute="bottom" id="VkY-Sv-S4Y"/>
-                            <constraint firstItem="39p-Oy-UWt" firstAttribute="height" secondItem="MRc-cV-rSz" secondAttribute="height" priority="750" id="cXp-hA-fm6"/>
+                            <constraint firstItem="39p-Oy-UWt" firstAttribute="height" secondItem="MRc-cV-rSz" secondAttribute="height" priority="750" constant="-200" id="cXp-hA-fm6"/>
                             <constraint firstItem="39p-Oy-UWt" firstAttribute="width" secondItem="MRc-cV-rSz" secondAttribute="width" id="lay-BG-PSB"/>
                             <constraint firstAttribute="trailing" secondItem="tHg-gb-5td" secondAttribute="trailing" id="pXJ-Rn-WXb"/>
                         </constraints>
@@ -174,15 +182,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVY-yo-bPD" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="696"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Введите свой логин" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="znv-ii-BiX">
                                                 <rect key="frame" x="41" y="311" width="332" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="34" id="mvq-gM-ZHJ"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Введите свой пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rq5-Gz-GY6">
                                                 <rect key="frame" x="41" y="405" width="332" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="34" id="lYT-as-OJr"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no"/>
                                             </textField>
@@ -230,7 +244,7 @@
                             <constraint firstItem="P0p-NX-HER" firstAttribute="top" secondItem="DUd-1z-GqB" secondAttribute="top" id="HY5-jL-6Dr"/>
                             <constraint firstAttribute="trailing" secondItem="P0p-NX-HER" secondAttribute="trailing" id="L34-RB-MFx"/>
                             <constraint firstItem="P0p-NX-HER" firstAttribute="leading" secondItem="DUd-1z-GqB" secondAttribute="leading" id="NNV-TN-nhM"/>
-                            <constraint firstItem="oVY-yo-bPD" firstAttribute="height" secondItem="DUd-1z-GqB" secondAttribute="height" priority="750" id="RYZ-wJ-eHW"/>
+                            <constraint firstItem="oVY-yo-bPD" firstAttribute="height" secondItem="DUd-1z-GqB" secondAttribute="height" priority="750" constant="-200" id="RYZ-wJ-eHW"/>
                             <constraint firstAttribute="bottom" secondItem="P0p-NX-HER" secondAttribute="bottom" id="Yqm-Oe-dHk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vur-nH-HXB"/>

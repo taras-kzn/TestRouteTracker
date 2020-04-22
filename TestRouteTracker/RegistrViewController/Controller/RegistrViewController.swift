@@ -25,6 +25,14 @@ class RegistrViewController: UIViewController, Storyboarded {
         
         scroolView?.addGestureRecognizer(hideKeyboardGesture)
         
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = -210
+        }
+        
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = 0.0
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

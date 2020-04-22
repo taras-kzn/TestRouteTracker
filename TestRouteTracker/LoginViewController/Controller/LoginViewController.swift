@@ -22,11 +22,20 @@ class LoginViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.hidesBackButton = true
+        
         let hideKeyboardGesture = UITapGestureRecognizer(target: self,
                                                          action: #selector(hideKeyboard))
         
         scrollView?.addGestureRecognizer(hideKeyboardGesture)
         
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = -210
+        }
+        
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = 0.0
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -121,6 +130,7 @@ class LoginViewController: UIViewController, Storyboarded {
     @objc func keyboardWillBeHidden(notification: Notification) {
         let contentInsets = UIEdgeInsets.zero
         scrollView?.contentInset = contentInsets
+        scrollView?.scrollIndicatorInsets = contentInsets
     }
     
     @objc func hideKeyboard() {
