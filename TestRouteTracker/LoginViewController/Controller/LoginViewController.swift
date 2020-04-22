@@ -21,10 +21,6 @@ class LoginViewController: UIViewController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//
-//        if UserDefaults.standard.bool(forKey: "isLogin") {
-//            coordinator?.goMainVC()
-//        }
         
         let hideKeyboardGesture = UITapGestureRecognizer(target: self,
                                                          action: #selector(hideKeyboard))
