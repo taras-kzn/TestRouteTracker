@@ -14,7 +14,8 @@ class MainViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        navigationItem.hidesBackButton = true
     }
     
     @IBAction func actionMapsButton(_ sender: Any) {
@@ -22,6 +23,7 @@ class MainViewController: UIViewController, Storyboarded {
     }
     
     @IBAction func backLoginButton(_ sender: Any) {
+        UserDefaults.standard.set(false, forKey: "isLogin")
         coordinator?.start()
     }
 }

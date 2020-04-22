@@ -73,7 +73,8 @@ class RegistrViewController: UIViewController, Storyboarded {
     }
     
     func actionAlert(action: UIAlertAction! = nil) {
-        coordinator?.start()
+        UserDefaults.standard.set(true, forKey: "isLogin")
+        coordinator?.goMainVC()
     }
     
     func messageError() {

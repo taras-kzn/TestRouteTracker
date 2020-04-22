@@ -21,12 +21,24 @@ class LoginViewController: UIViewController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//
+//        if UserDefaults.standard.bool(forKey: "isLogin") {
+//            coordinator?.goMainVC()
+//        }
         
         let hideKeyboardGesture = UITapGestureRecognizer(target: self,
                                                          action: #selector(hideKeyboard))
         
         scrollView?.addGestureRecognizer(hideKeyboardGesture)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
+        if UserDefaults.standard.bool(forKey: "isLogin") {
+            coordinator?.goMainVC()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +74,7 @@ class LoginViewController: UIViewController, Storyboarded {
         
         if !users.login.isEmpty, !users.password.isEmpty {
             if login == users.login.lowercased() && password == users.password.lowercased() {
+                UserDefaults.standard.set(true, forKey: "isLogin")
                 coordinator?.goMainVC()
             } else {
                 errorAuthorization()
