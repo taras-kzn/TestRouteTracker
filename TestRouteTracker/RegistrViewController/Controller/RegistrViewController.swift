@@ -7,18 +7,23 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class RegistrViewController: UIViewController, Storyboarded {
 
     @IBOutlet var scroolView: UIScrollView!
     @IBOutlet var passwordTextFild: UITextField!
     @IBOutlet var loginTextFild: UITextField!
+    @IBOutlet var registrButtonRX: UIButton!
     
     let realmService = RealmUserData()
     var coordinator: MainCoordinators?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureRegistrButton()
         
         let hideKeyboardGesture = UITapGestureRecognizer(target: self,
                                                          action: #selector(hideKeyboard))
@@ -68,6 +73,14 @@ class RegistrViewController: UIViewController, Storyboarded {
             messageAlert(title: "Отлично", message: "Вы успешно зарегестрировались")
         } else {
             messageError()
+        }
+    }
+    
+    func configureRegistrButton() {
+        Observable.combineLatest(loginTextFild.rx.text, passwordTextFild.rx.text).map {login, password in
+            return !(login ?? "").isEmpty && (password ?? "").count >= 3
+        }.bind { [weak registrButtonRX] input in
+            registrButtonRX?.isEnabled = input
         }
     }
     

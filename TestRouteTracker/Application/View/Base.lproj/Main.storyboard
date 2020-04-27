@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Tf-Lx-i8w">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -161,6 +161,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="z2W-GX-66B"/>
                     <connections>
+                        <outlet property="loginButton" destination="FHK-If-Jyo" id="jTu-PO-K0m"/>
                         <outlet property="loginTextFild" destination="fbV-08-g8E" id="fPe-9k-JwD"/>
                         <outlet property="passwordTextFild" destination="0Fk-vl-Vwc" id="GjS-6I-MIj"/>
                         <outlet property="scrollView" destination="tHg-gb-5td" id="j65-Dr-6Qb"/>
@@ -253,6 +254,7 @@
                     <connections>
                         <outlet property="loginTextFild" destination="znv-ii-BiX" id="j1i-fo-qRE"/>
                         <outlet property="passwordTextFild" destination="rq5-Gz-GY6" id="S4D-YL-sRR"/>
+                        <outlet property="registrButtonRX" destination="lX0-k4-XJV" id="11R-QK-DCD"/>
                         <outlet property="scroolView" destination="P0p-NX-HER" id="cgH-rV-onG"/>
                     </connections>
                 </viewController>
