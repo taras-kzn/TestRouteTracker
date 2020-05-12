@@ -14,7 +14,7 @@ class OneViewController: UIViewController, Storyboarded {
 
     let realmService = RealmData()
     var marker: GMSMarker?
-    var locationManager: CLLocationManager?
+    let locationManager = LocationManager.instance
     var geocoder: CLGeocoder = CLGeocoder()
     var status = false
     var saveRoute: GMSPolyline?
@@ -39,21 +39,21 @@ class OneViewController: UIViewController, Storyboarded {
     }
     
     func configureLocationManager() {
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.pausesLocationUpdatesAutomatically = false
-        locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager?.startMonitoringSignificantLocationChanges()
-        locationManager?.requestAlwaysAuthorization()
-        locationManager?.requestLocation()
+        locationManager.location.asObservable().bind { [weak self] location in
+            guard let location = location else {return}
+            self?.routePath?.add(location.coordinate)
+            self?.route?.path = self?.routePath
+            
+            let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
+            self?.mapView.animate(to: position)
+        }
     }
     
     @IBAction func action(_ sender: UIButton) {
         if status {
             actionButton.setTitle("Start", for: .normal)
-            locationManager?.stopUpdatingLocation()
-            locationManager?.stopMonitoringSignificantLocationChanges()
+            locationManager.stopUpdatingLocation()
+            locationManager.stopMonitoringSignificantLocationChanges()
             guard let stringPath = routePath?.encodedPath() else {return}
             realmService.saveRouteData(stringPath)
             route?.map = nil
@@ -67,7 +67,7 @@ class OneViewController: UIViewController, Storyboarded {
             route?.strokeWidth = 5
             routePath = GMSMutablePath()
             route?.map = mapView
-            locationManager?.startUpdatingLocation()
+            locationManager.startUpdatingLocation()
             status = true
         }
     }
@@ -92,8 +92,8 @@ class OneViewController: UIViewController, Storyboarded {
     
     func actionAlert(action: UIAlertAction! = nil) {
         actionButton.setTitle("Start", for: .normal)
-        locationManager?.stopUpdatingLocation()
-        locationManager?.stopMonitoringSignificantLocationChanges()
+        locationManager.stopUpdatingLocation()
+        locationManager.stopMonitoringSignificantLocationChanges()
         guard let stringPath = routePath?.encodedPath() else {return}
         realmService.saveRouteData(stringPath)
         route?.map = nil
@@ -157,16 +157,3 @@ extension OneViewController: GMSMapViewDelegate {
     }
 }
 
-extension OneViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else {return}
-        routePath?.add(location.coordinate)
-        route?.path = routePath
-        let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
-        mapView.animate(to: position)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
-    }
-}

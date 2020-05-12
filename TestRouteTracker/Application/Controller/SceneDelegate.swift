@@ -34,11 +34,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
+        self.window?.viewWithTag(221122)?.removeFromSuperview()
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = window!.frame
+        blurEffectView.tag = 221122
+        self.window?.addSubview(blurEffectView)
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
     }

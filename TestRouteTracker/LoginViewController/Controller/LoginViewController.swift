@@ -8,12 +8,15 @@
 
 import UIKit
 import RealmSwift
+import RxSwift
+import RxCocoa
 
 class LoginViewController: UIViewController, Storyboarded {
 
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var loginTextFild: UITextField!
     @IBOutlet var passwordTextFild: UITextField!
+    @IBOutlet var loginButton: UIButton!
     
     var realmService = RealmUserData()
     var users = User()
@@ -21,16 +24,22 @@ class LoginViewController: UIViewController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//
-//        if UserDefaults.standard.bool(forKey: "isLogin") {
-//            coordinator?.goMainVC()
-//        }
+        
+        configureLoginBinding()
+        navigationItem.hidesBackButton = true
         
         let hideKeyboardGesture = UITapGestureRecognizer(target: self,
                                                          action: #selector(hideKeyboard))
         
         scrollView?.addGestureRecognizer(hideKeyboardGesture)
         
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = -210
+        }
+        
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = 0.0
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,9 +78,9 @@ class LoginViewController: UIViewController, Storyboarded {
     
     @IBAction func loginActionButton(_ sender: Any) {
         guard let login = loginTextFild.text?.lowercased(), let password = passwordTextFild.text?.lowercased() else {return}
-        
+
         loadUsers(login: login)
-        
+
         if !users.login.isEmpty, !users.password.isEmpty {
             if login == users.login.lowercased() && password == users.password.lowercased() {
                 UserDefaults.standard.set(true, forKey: "isLogin")
@@ -81,6 +90,15 @@ class LoginViewController: UIViewController, Storyboarded {
             }
         } else {
             errorAuthorization()
+        }
+    }
+    
+    func configureLoginBinding() {
+        Observable.combineLatest(loginTextFild.rx.text, passwordTextFild.rx.text).map { login, password in
+            return !(login ?? "").isEmpty && (password ?? "").count >= 3
+        }.bind {
+            [weak loginButton] inputFilled in
+            loginButton?.isEnabled = inputFilled
         }
     }
     
@@ -125,6 +143,7 @@ class LoginViewController: UIViewController, Storyboarded {
     @objc func keyboardWillBeHidden(notification: Notification) {
         let contentInsets = UIEdgeInsets.zero
         scrollView?.contentInset = contentInsets
+        scrollView?.scrollIndicatorInsets = contentInsets
     }
     
     @objc func hideKeyboard() {
