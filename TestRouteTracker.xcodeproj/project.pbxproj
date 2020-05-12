@@ -24,6 +24,7 @@
 		845AF7832446E835009CA3C4 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AF7822446E835009CA3C4 /* Coordinator.swift */; };
 		845AF7852446E8C8009CA3C4 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AF7842446E8C8009CA3C4 /* Storyboarded.swift */; };
 		845AF7872446E9E6009CA3C4 /* MainCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AF7862446E9E6009CA3C4 /* MainCoordinators.swift */; };
+		8461A2CF245978C6009C682C /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461A2CE245978C6009C682C /* LocationManager.swift */; };
 		851A141C909734608FD2EC0B /* Pods_TestRouteTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749EF0A5519B2CF9FFCBB39C /* Pods_TestRouteTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		845AF7822446E835009CA3C4 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		845AF7842446E8C8009CA3C4 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		845AF7862446E9E6009CA3C4 /* MainCoordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinators.swift; sourceTree = "<group>"; };
+		8461A2CE245978C6009C682C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 		845AF74924313F6F009CA3C4 /* TestRouteTracker */ = {
 			isa = PBXGroup;
 			children = (
+				8461A2CD2459785E009C682C /* LocationMan */,
 				845AF77D2446E6E1009CA3C4 /* MainViewController */,
 				845AF7772445CF95009CA3C4 /* RegistrViewController */,
 				845AF7732445BB14009CA3C4 /* LoginViewController */,
@@ -241,6 +244,14 @@
 				845AF7862446E9E6009CA3C4 /* MainCoordinators.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		8461A2CD2459785E009C682C /* LocationMan */ = {
+			isa = PBXGroup;
+			children = (
+				8461A2CE245978C6009C682C /* LocationManager.swift */,
+			);
+			path = LocationMan;
 			sourceTree = "<group>";
 		};
 		BB5C7DB652D84C66C0235BBF /* Pods */ = {
@@ -404,6 +415,7 @@
 				845AF77A2445CFD0009CA3C4 /* RegistrViewController.swift in Sources */,
 				845AF74B24313F6F009CA3C4 /* AppDelegate.swift in Sources */,
 				845AF74D24313F6F009CA3C4 /* SceneDelegate.swift in Sources */,
+				8461A2CF245978C6009C682C /* LocationManager.swift in Sources */,
 				845AF7802446E710009CA3C4 /* MainViewController.swift in Sources */,
 				845AF7852446E8C8009CA3C4 /* Storyboarded.swift in Sources */,
 				845AF7872446E9E6009CA3C4 /* MainCoordinators.swift in Sources */,
