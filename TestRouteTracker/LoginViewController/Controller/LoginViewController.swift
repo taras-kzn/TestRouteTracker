@@ -11,15 +11,15 @@ import RealmSwift
 import RxSwift
 import RxCocoa
 
-class LoginViewController: UIViewController, Storyboarded {
+final class LoginViewController: UIViewController, Storyboarded {
 
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var loginTextFild: UITextField!
     @IBOutlet var passwordTextFild: UITextField!
     @IBOutlet var loginButton: UIButton!
     
-    var realmService = RealmUserData()
-    var users = User()
+    private var realmService = RealmUserData()
+    private var users = User()
     var coordinator: MainCoordinators?
     
     override func viewDidLoad() {
@@ -93,7 +93,7 @@ class LoginViewController: UIViewController, Storyboarded {
         }
     }
     
-    func configureLoginBinding() {
+    private func configureLoginBinding() {
         Observable.combineLatest(loginTextFild.rx.text, passwordTextFild.rx.text).map { login, password in
             return !(login ?? "").isEmpty && (password ?? "").count >= 3
         }.bind {
@@ -106,7 +106,7 @@ class LoginViewController: UIViewController, Storyboarded {
         coordinator?.goRegistrVC()
     }
     
-    func loadUsers(login: String) {
+    private func loadUsers(login: String) {
         let user = User()
         do {
             let realm = try Realm()
@@ -121,7 +121,7 @@ class LoginViewController: UIViewController, Storyboarded {
         }
     }
     
-    func errorAuthorization() {
+    private func errorAuthorization() {
         loginTextFild.text = nil
         passwordTextFild.text = nil
         let ac = UIAlertController(title: "Ошибка", message: "Вы ввели неправильно логин или пароль", preferredStyle: .alert)
@@ -135,7 +135,6 @@ class LoginViewController: UIViewController, Storyboarded {
         let info = notification.userInfo! as NSDictionary
         let kbSize = (info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue).cgRectValue.size
         let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: kbSize.height, right: 0.0)
-        
         self.scrollView?.contentInset = contentInsets
         scrollView?.scrollIndicatorInsets = contentInsets
     }

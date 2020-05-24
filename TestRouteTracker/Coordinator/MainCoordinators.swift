@@ -36,8 +36,9 @@ class MainCoordinators: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func goMapsVC() {
+    func goMapsVC(image: UIImage?) {
         let vc = OneViewController.instantiate()
+        vc.imageSelfi = image
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
     }

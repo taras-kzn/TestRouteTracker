@@ -10,17 +10,18 @@ import UIKit
 import GoogleMaps
 import RealmSwift
 
-class OneViewController: UIViewController, Storyboarded {
+final class OneViewController: UIViewController, Storyboarded {
 
-    let realmService = RealmData()
-    var marker: GMSMarker?
-    let locationManager = LocationManager.instance
-    var geocoder: CLGeocoder = CLGeocoder()
-    var status = false
-    var saveRoute: GMSPolyline?
-    var route: GMSPolyline?
-    var routePath: GMSMutablePath?
+    private let realmService = RealmData()
+    private var marker: GMSMarker?
+    private let locationManager = LocationManager.instance
+    private var geocoder: CLGeocoder = CLGeocoder()
+    private var status = false
+    private var saveRoute: GMSPolyline?
+    private var route: GMSPolyline?
+    private var routePath: GMSMutablePath?
     var coordinator: MainCoordinators?
+    var imageSelfi: UIImage?
     
     @IBOutlet var actionButton: UIButton!
     @IBOutlet var mapView: GMSMapView!
@@ -32,18 +33,18 @@ class OneViewController: UIViewController, Storyboarded {
         actionButton.layer.cornerRadius = 15
     }
     
-    func configureMap() {
+    private func configureMap() {
         mapView.mapType = .hybrid
         mapView.addSubview(actionButton)
         mapView.delegate = self
     }
     
-    func configureLocationManager() {
+    private func configureLocationManager() {
         locationManager.location.asObservable().bind { [weak self] location in
             guard let location = location else {return}
+            self?.newAddMarker(coordinate: location.coordinate)
             self?.routePath?.add(location.coordinate)
             self?.route?.path = self?.routePath
-            
             let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
             self?.mapView.animate(to: position)
         }
@@ -58,6 +59,7 @@ class OneViewController: UIViewController, Storyboarded {
             realmService.saveRouteData(stringPath)
             route?.map = nil
             routePath?.removeAllCoordinates()
+            mapView.clear()
             status = false
         } else {
             actionButton.setTitle("Stop", for: .normal)
@@ -72,8 +74,18 @@ class OneViewController: UIViewController, Storyboarded {
         }
     }
     
-    func newAddMarker(coordinate: CLLocationCoordinate2D) {
+    private func newAddMarker(coordinate: CLLocationCoordinate2D) {
         let marker = GMSMarker(position: coordinate)
+        let rect = CGRect(x: 0, y: 0, width: 40, height: 40)
+        let view = UIView(frame: rect)
+        let imageView = UIImageView(frame: rect)
+        imageView.image = self.imageSelfi
+        view.layer.cornerRadius = 30
+        view.layer.shadowOpacity = 0.9
+        imageView.layer.cornerRadius = 30
+        imageView.layer.masksToBounds = true
+        view.addSubview(imageView)
+        marker.iconView = view
         let camera = GMSCameraPosition.camera(withTarget: coordinate, zoom: 17)
         marker.map = mapView
         mapView.animate(to: camera)
@@ -90,7 +102,7 @@ class OneViewController: UIViewController, Storyboarded {
         }
     }
     
-    func actionAlert(action: UIAlertAction! = nil) {
+    private func actionAlert(action: UIAlertAction! = nil) {
         actionButton.setTitle("Start", for: .normal)
         locationManager.stopUpdatingLocation()
         locationManager.stopMonitoringSignificantLocationChanges()
@@ -102,7 +114,7 @@ class OneViewController: UIViewController, Storyboarded {
         oldRoute()
     }
     
-    func oldRoute() {
+    private func oldRoute() {
         saveRoute?.map = nil
         saveRoute = GMSPolyline()
         saveRoute?.strokeWidth = 5
@@ -117,7 +129,7 @@ class OneViewController: UIViewController, Storyboarded {
         route.map = mapView
     }
     
-    func addMarker(position: CLLocationCoordinate2D, title: String, snipet: String) {
+    private func addMarker(position: CLLocationCoordinate2D, title: String, snipet: String) {
         let marker = GMSMarker(position: position)
         let camera = GMSCameraPosition.camera(withTarget: position, zoom: 17)
         marker.icon = GMSMarker.markerImage(with: .green)
@@ -128,12 +140,12 @@ class OneViewController: UIViewController, Storyboarded {
         self.marker = marker
     }
     
-    func removeMarker() {
+    private func removeMarker() {
         marker?.map = nil
         marker = nil
     }
     
-    func geocoderLocation(marker: GMSMarker, coordinate: CLLocationCoordinate2D) {
+    private func geocoderLocation(marker: GMSMarker, coordinate: CLLocationCoordinate2D) {
         geocoder.reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)) { (places, error) in
             if let place = places?.first {
                 marker.snippet = place.administrativeArea
