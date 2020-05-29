@@ -15,7 +15,7 @@ final class MainViewController: UIViewController, Storyboarded {
     @IBOutlet var imageView: UIView!
     @IBOutlet var imageViewSelfi: UIImageView!
     
-    var coordinator: MainCoordinators?
+    weak var coordinator: MainCoordinators?
     var imageSelfi: UIImage?
     
     override func viewDidLoad() {

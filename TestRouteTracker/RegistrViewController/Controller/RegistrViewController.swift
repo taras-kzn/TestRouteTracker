@@ -18,7 +18,7 @@ final class RegistrViewController: UIViewController, Storyboarded {
     @IBOutlet var registrButtonRX: UIButton!
     
     private let realmService = RealmUserData()
-    var coordinator: MainCoordinators?
+    weak var coordinator: MainCoordinators?
     
     override func viewDidLoad() {
         super.viewDidLoad()

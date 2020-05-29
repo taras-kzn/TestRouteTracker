@@ -20,7 +20,7 @@ final class OneViewController: UIViewController, Storyboarded {
     private var saveRoute: GMSPolyline?
     private var route: GMSPolyline?
     private var routePath: GMSMutablePath?
-    var coordinator: MainCoordinators?
+    weak var coordinator: MainCoordinators?
     var imageSelfi: UIImage?
     
     @IBOutlet var actionButton: UIButton!
