@@ -19,7 +19,6 @@ final class LocationManager: NSObject {
     }
     
     let locationManager = CLLocationManager()
-    
     let location: Variable<CLLocation?> = Variable(nil)
     
     func startUpdatingLocation() {

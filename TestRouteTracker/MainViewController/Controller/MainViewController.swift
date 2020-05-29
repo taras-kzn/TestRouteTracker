@@ -7,23 +7,86 @@
 //
 
 import UIKit
+import Foundation
 
-class MainViewController: UIViewController, Storyboarded {
+
+final class MainViewController: UIViewController, Storyboarded {
     
-    var coordinator: MainCoordinators?
-
+    @IBOutlet var imageView: UIView!
+    @IBOutlet var imageViewSelfi: UIImageView!
+    
+    weak var coordinator: MainCoordinators?
+    var imageSelfi: UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configImage()
+        loadImage()
         navigationItem.hidesBackButton = true
     }
     
+    @IBAction func tappedPicture(_ sender: Any) {
+        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
+            print("no camer")
+            return }
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.allowsEditing = true
+        imagePickerController.delegate = self
+        
+        present(imagePickerController, animated: true)
+    }
+    
     @IBAction func actionMapsButton(_ sender: Any) {
-        coordinator?.goMapsVC()
+        coordinator?.goMapsVC(image: imageSelfi)
     }
     
     @IBAction func backLoginButton(_ sender: Any) {
         UserDefaults.standard.set(false, forKey: "isLogin")
         coordinator?.start()
+    }
+    
+    private func configImage() {
+        imageView.layer.cornerRadius = 20
+        imageView.layer.shadowOpacity = 0.5
+        imageViewSelfi.layer.cornerRadius = 15
+        imageViewSelfi.layer.masksToBounds = true
+    }
+    
+    private func saveImage(image: UIImage) {
+        let image = image
+        let imagedata = image.pngData()
+        UserDefaults.standard.set(imagedata, forKey: "saveImage")
+    }
+    
+    private func loadImage() {
+        if let imageDta = UserDefaults.standard.object(forKey: "saveImage") as? Data {
+            let image = UIImage(data: imageDta)
+            imageViewSelfi.image = image
+            imageSelfi = image
+        } else {
+            print("Нет фото по ключу saveImage")
+        }
+    }
+}
+
+extension MainViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+    
+    func imagePickerController(
+        _ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+            
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            print("есть фото \(image)")
+            saveImage(image: image)
+            loadImage()
+        } else {
+            print("no image")
+        }
+        picker.dismiss(animated: true)
     }
 }

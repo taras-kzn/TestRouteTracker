@@ -104,7 +104,6 @@
 		845AF76024314601009CA3C4 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				845AF76324314638009CA3C4 /* Model */,
 				845AF76224314630009CA3C4 /* View */,
 				845AF76124314621009CA3C4 /* Controller */,
 			);
@@ -127,13 +126,6 @@
 				845AF75524313F75009CA3C4 /* LaunchScreen.storyboard */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		845AF76324314638009CA3C4 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		845AF7642431468E009CA3C4 /* Resource */ = {
@@ -566,7 +558,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2PQ8675BM6;
 				INFOPLIST_FILE = "$(SRCROOT)/TestRouteTracker/Resource/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -586,7 +578,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2PQ8675BM6;
 				INFOPLIST_FILE = "$(SRCROOT)/TestRouteTracker/Resource/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

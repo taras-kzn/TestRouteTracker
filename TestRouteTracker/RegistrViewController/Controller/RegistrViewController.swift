@@ -10,15 +10,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class RegistrViewController: UIViewController, Storyboarded {
+final class RegistrViewController: UIViewController, Storyboarded {
 
     @IBOutlet var scroolView: UIScrollView!
     @IBOutlet var passwordTextFild: UITextField!
     @IBOutlet var loginTextFild: UITextField!
     @IBOutlet var registrButtonRX: UIButton!
     
-    let realmService = RealmUserData()
-    var coordinator: MainCoordinators?
+    private let realmService = RealmUserData()
+    weak var coordinator: MainCoordinators?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +76,7 @@ class RegistrViewController: UIViewController, Storyboarded {
         }
     }
     
-    func configureRegistrButton() {
+    private func configureRegistrButton() {
         Observable.combineLatest(loginTextFild.rx.text, passwordTextFild.rx.text).map {login, password in
             return !(login ?? "").isEmpty && (password ?? "").count >= 3
         }.bind { [weak registrButtonRX] input in
@@ -84,7 +84,7 @@ class RegistrViewController: UIViewController, Storyboarded {
         }
     }
     
-    func messageAlert(title: String, message: String) {
+    private func messageAlert(title: String, message: String) {
         loginTextFild.text = nil
         passwordTextFild.text = nil
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -93,12 +93,12 @@ class RegistrViewController: UIViewController, Storyboarded {
         present(ac, animated: true)
     }
     
-    func actionAlert(action: UIAlertAction! = nil) {
+    private func actionAlert(action: UIAlertAction! = nil) {
         UserDefaults.standard.set(true, forKey: "isLogin")
         coordinator?.goMainVC()
     }
     
-    func messageError() {
+    private func messageError() {
         let ac = UIAlertController(title: "Ошибка", message: "По пробовать заново", preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .default)
         ac.addAction(action)
