@@ -113,8 +113,8 @@
 		845AF76124314621009CA3C4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				845AF74C24313F6F009CA3C4 /* SceneDelegate.swift */,
 				845AF74A24313F6F009CA3C4 /* AppDelegate.swift */,
+				845AF74C24313F6F009CA3C4 /* SceneDelegate.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

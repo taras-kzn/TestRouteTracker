@@ -11,13 +11,13 @@ import Foundation
 
 
 final class MainViewController: UIViewController, Storyboarded {
-    
-    @IBOutlet var imageView: UIView!
-    @IBOutlet var imageViewSelfi: UIImageView!
-    
+    //MARK: - IBOutlet
+    @IBOutlet private var imageView: UIView!
+    @IBOutlet private var imageViewSelfi: UIImageView!
+    //MARK: - Properties
     weak var coordinator: MainCoordinators?
-    var imageSelfi: UIImage?
-    
+    private var imageSelfi: UIImage?
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +25,7 @@ final class MainViewController: UIViewController, Storyboarded {
         loadImage()
         navigationItem.hidesBackButton = true
     }
-    
+    //MARK: - Actions
     @IBAction func tappedPicture(_ sender: Any) {
         guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
             print("no camer")
@@ -46,7 +46,7 @@ final class MainViewController: UIViewController, Storyboarded {
         UserDefaults.standard.set(false, forKey: "isLogin")
         coordinator?.start()
     }
-    
+    //MARK: - Functions
     private func configImage() {
         imageView.layer.cornerRadius = 20
         imageView.layer.shadowOpacity = 0.5
@@ -70,7 +70,7 @@ final class MainViewController: UIViewController, Storyboarded {
         }
     }
 }
-
+//MARK: - NavigationControllerDelegate, ImagePickerControllerDelegate
 extension MainViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -79,7 +79,6 @@ extension MainViewController: UINavigationControllerDelegate, UIImagePickerContr
     
     func imagePickerController(
         _ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-            
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             print("есть фото \(image)")
             saveImage(image: image)

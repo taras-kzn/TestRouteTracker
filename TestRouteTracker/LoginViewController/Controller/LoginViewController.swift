@@ -12,34 +12,22 @@ import RxSwift
 import RxCocoa
 
 final class LoginViewController: UIViewController, Storyboarded {
-
-    @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet var loginTextFild: UITextField!
-    @IBOutlet var passwordTextFild: UITextField!
-    @IBOutlet var loginButton: UIButton!
-    
+    //MARK: - IBOutlet
+    @IBOutlet private var scrollView: UIScrollView!
+    @IBOutlet private var loginTextFild: UITextField!
+    @IBOutlet private var passwordTextFild: UITextField!
+    @IBOutlet private var loginButton: UIButton!
+    //MARK: - Properties
     private var realmService = RealmUserData()
     private var users = User()
     var coordinator: MainCoordinators?
-    
+    //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureLoginBinding()
+        configureKeyBoard()
         navigationItem.hidesBackButton = true
-        
-        let hideKeyboardGesture = UITapGestureRecognizer(target: self,
-                                                         action: #selector(hideKeyboard))
-        
-        scrollView?.addGestureRecognizer(hideKeyboardGesture)
-        
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
-            self.view.frame.origin.y = -210
-        }
-        
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
-            self.view.frame.origin.y = 0.0
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,30 +40,14 @@ final class LoginViewController: UIViewController, Storyboarded {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardWasShown),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardWillBeHidden(notification:)),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
+        addNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillShowNotification,
-                                                  object: nil)
-              
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillHideNotification,
-                                                  object: nil)
+        removeNotifications()
     }
-    
+    //MARK: - Actions
     @IBAction func loginActionButton(_ sender: Any) {
         guard let login = loginTextFild.text?.lowercased(), let password = passwordTextFild.text?.lowercased() else {return}
 
@@ -93,6 +65,34 @@ final class LoginViewController: UIViewController, Storyboarded {
         }
     }
     
+    @IBAction func registerButton(_ sender: Any) {
+        coordinator?.goRegistrVC()
+    }
+    //MARK: - Private Functions
+    private func configureKeyBoard(){
+        let hideKeyboardGesture = UITapGestureRecognizer(target: self,
+                                                         action: #selector(hideKeyboard))
+        scrollView?.addGestureRecognizer(hideKeyboardGesture)
+        
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = -210
+        }
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = 0.0
+        }
+    }
+    
+    private func addNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     private func configureLoginBinding() {
         Observable.combineLatest(loginTextFild.rx.text, passwordTextFild.rx.text).map { login, password in
             return !(login ?? "").isEmpty && (password ?? "").count >= 3
@@ -100,10 +100,6 @@ final class LoginViewController: UIViewController, Storyboarded {
             [weak loginButton] inputFilled in
             loginButton?.isEnabled = inputFilled
         }
-    }
-    
-    @IBAction func registerButton(_ sender: Any) {
-        coordinator?.goRegistrVC()
     }
     
     private func loadUsers(login: String) {
@@ -129,9 +125,8 @@ final class LoginViewController: UIViewController, Storyboarded {
         ac.addAction(action)
         present(ac, animated: true)
     }
-    
+    //MARK: - Functions
     @objc func keyboardWasShown(notification: Notification) {
-        
         let info = notification.userInfo! as NSDictionary
         let kbSize = (info.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue).cgRectValue.size
         let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: kbSize.height, right: 0.0)

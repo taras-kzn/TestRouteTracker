@@ -11,25 +11,17 @@ import CoreLocation
 import RxSwift
 
 final class LocationManager: NSObject {
-    //MARK: - Properties
     static let instance = LocationManager()
     
-    private let locationManager = CLLocationManager()
-    let location: Variable<CLLocation?> = Variable(nil)
-    //MARK: - init
     private override init() {
         super.init()
+        
         configureLocationManager()
     }
-    //MARK: - Functuions
-    private func configureLocationManager() {
-        locationManager.delegate = self
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.pausesLocationUpdatesAutomatically = false
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager.startMonitoringSignificantLocationChanges()
-        locationManager.requestAlwaysAuthorization()
-    }
+    
+    let locationManager = CLLocationManager()
+    
+    let location: Variable<CLLocation?> = Variable(nil)
     
     func startUpdatingLocation() {
         locationManager.startUpdatingLocation()
@@ -42,10 +34,21 @@ final class LocationManager: NSObject {
     func stopMonitoringSignificantLocationChanges() {
         locationManager.stopMonitoringSignificantLocationChanges()
     }
+    
+    private func configureLocationManager() {
+        locationManager.delegate = self
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestLocation()
+    }
 }
-//MARK: - LocationManagerDelegate
+
 extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         self.location.value = locations.last
     }
     

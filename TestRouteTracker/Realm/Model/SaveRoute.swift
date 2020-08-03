@@ -10,5 +10,6 @@ import Foundation
 import RealmSwift
 
 class SaveRoute: Object {
+    //MARK: property
     @objc dynamic var encodedPath = ""
 }

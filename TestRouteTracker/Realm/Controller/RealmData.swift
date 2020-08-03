@@ -10,8 +10,8 @@ import Foundation
 import RealmSwift
 import GoogleMaps
 
-class RealmData {
-    
+final class RealmData {
+    //MARK: - Functions
     func saveRouteData(_ route: String) {
         let saveRoute = SaveRoute()
         saveRoute.encodedPath = route

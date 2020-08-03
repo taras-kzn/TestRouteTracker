@@ -11,61 +11,32 @@ import RxSwift
 import RxCocoa
 
 final class RegistrViewController: UIViewController, Storyboarded {
-
-    @IBOutlet var scroolView: UIScrollView!
-    @IBOutlet var passwordTextFild: UITextField!
-    @IBOutlet var loginTextFild: UITextField!
-    @IBOutlet var registrButtonRX: UIButton!
-    
+    //MARK: - IBOutlet
+    @IBOutlet private var scroolView: UIScrollView!
+    @IBOutlet private var passwordTextFild: UITextField!
+    @IBOutlet private var loginTextFild: UITextField!
+    @IBOutlet private var registrButtonRX: UIButton!
+    //MARK: - Properties
     private let realmService = RealmUserData()
     weak var coordinator: MainCoordinators?
-    
+    //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureRegistrButton()
-        
-        let hideKeyboardGesture = UITapGestureRecognizer(target: self,
-                                                         action: #selector(hideKeyboard))
-        
-        scroolView?.addGestureRecognizer(hideKeyboardGesture)
-        
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
-            self.view.frame.origin.y = -210
-        }
-        
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
-            self.view.frame.origin.y = 0.0
-        }
-        
+        configureKeyBoard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardWasShown),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardWillBeHidden(notification:)),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
+        addNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillShowNotification,
-                                                  object: nil)
-              
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillHideNotification,
-                                                  object: nil)
+        removeNotifications()
     }
-    
+    //MARK: - Action
     @IBAction func registrButton(_ sender: Any) {
         guard let login = loginTextFild.text, let password = passwordTextFild.text else {return}
         if !login.isEmpty , !password.isEmpty {
@@ -74,6 +45,30 @@ final class RegistrViewController: UIViewController, Storyboarded {
         } else {
             messageError()
         }
+    }
+    //MARK: - Private Functions
+    private func configureKeyBoard() {
+        let hideKeyboardGesture = UITapGestureRecognizer(target: self,
+                                                         action: #selector(hideKeyboard))
+        scroolView?.addGestureRecognizer(hideKeyboardGesture)
+        
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = -210
+        }
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = 0.0
+        }
+    }
+    
+    private func addNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private func configureRegistrButton() {
@@ -104,7 +99,7 @@ final class RegistrViewController: UIViewController, Storyboarded {
         ac.addAction(action)
         present(ac, animated: true)
     }
-    
+    //MARK: - Functions
     @objc func keyboardWasShown(notification: Notification) {
         
         let info = notification.userInfo! as NSDictionary

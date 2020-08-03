@@ -11,7 +11,10 @@ import GoogleMaps
 import RealmSwift
 
 final class OneViewController: UIViewController, Storyboarded {
-
+    //MARK: - IBOutlet
+    @IBOutlet private var actionButton: UIButton!
+    @IBOutlet private var mapView: GMSMapView!
+    //MARK: - Properties
     private let realmService = RealmData()
     private var marker: GMSMarker?
     private let locationManager = LocationManager.instance
@@ -22,34 +25,14 @@ final class OneViewController: UIViewController, Storyboarded {
     private var routePath: GMSMutablePath?
     weak var coordinator: MainCoordinators?
     var imageSelfi: UIImage?
-    
-    @IBOutlet var actionButton: UIButton!
-    @IBOutlet var mapView: GMSMapView!
-    
+    //MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureMap()
         configureLocationManager()
         actionButton.layer.cornerRadius = 15
     }
-    
-    private func configureMap() {
-        mapView.mapType = .hybrid
-        mapView.addSubview(actionButton)
-        mapView.delegate = self
-    }
-    
-    private func configureLocationManager() {
-        locationManager.location.asObservable().bind { [weak self] location in
-            guard let location = location else {return}
-            self?.newAddMarker(coordinate: location.coordinate)
-            self?.routePath?.add(location.coordinate)
-            self?.route?.path = self?.routePath
-            let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
-            self?.mapView.animate(to: position)
-        }
-    }
-    
+    //MARK: - Actions
     @IBAction func action(_ sender: UIButton) {
         if status {
             actionButton.setTitle("Start", for: .normal)
@@ -74,6 +57,34 @@ final class OneViewController: UIViewController, Storyboarded {
         }
     }
     
+    @IBAction func goHome(_ sender: UIButton) {
+        if status == true {
+            let ac = UIAlertController(title: "Cлежение активное на данный момент", message: "Необходимо остановить слижение", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .default, handler: actionAlert)
+            ac.addAction(action)
+            present(ac, animated: true)
+        } else {
+            oldRoute()
+        }
+    }
+    //MARK: - Private Functions
+    private func configureMap() {
+        mapView.mapType = .hybrid
+        mapView.addSubview(actionButton)
+        mapView.delegate = self
+    }
+    
+    private func configureLocationManager() {
+        locationManager.location.asObservable().bind { [weak self] location in
+            guard let location = location else {return}
+            self?.newAddMarker(coordinate: location.coordinate)
+            self?.routePath?.add(location.coordinate)
+            self?.route?.path = self?.routePath
+            let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 17)
+            self?.mapView.animate(to: position)
+        }
+    }
+    
     private func newAddMarker(coordinate: CLLocationCoordinate2D) {
         let marker = GMSMarker(position: coordinate)
         let rect = CGRect(x: 0, y: 0, width: 40, height: 40)
@@ -89,17 +100,6 @@ final class OneViewController: UIViewController, Storyboarded {
         let camera = GMSCameraPosition.camera(withTarget: coordinate, zoom: 17)
         marker.map = mapView
         mapView.animate(to: camera)
-    }
-    
-    @IBAction func goHome(_ sender: UIButton) {
-        if status == true {
-            let ac = UIAlertController(title: "Cлежение активное на данный момент", message: "Необходимо остановить слижение", preferredStyle: .alert)
-            let action = UIAlertAction(title: "Ok", style: .default, handler: actionAlert)
-            ac.addAction(action)
-            present(ac, animated: true)
-        } else {
-            oldRoute()
-        }
     }
     
     private func actionAlert(action: UIAlertAction! = nil) {
@@ -154,7 +154,7 @@ final class OneViewController: UIViewController, Storyboarded {
         }
     }
 }
-
+//MARK: - GMSMapViewDelegate
 extension OneViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         if let manualMarker = marker {

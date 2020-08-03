@@ -10,8 +10,8 @@ import Foundation
 import RealmSwift
 
 
-class RealmUserData {
-    
+final class RealmUserData {
+    //MARK: - Functions
     func saveUserData(login: String, password: String) {
         var saveUser = [User]()
         let user = User()
